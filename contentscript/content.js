@@ -1,8 +1,2 @@
-/* const header = document.createElement('header');
-const shadowRoot = header.attachShadow({ mode: 'open' });
-shadowRoot.innerHTML = '<h1>SHADOW DOM BABY!</h1>';
-
-document.body.appendChild(header);
-
-alert('Running!');
- */
+// A very confusing scenario but this extension doesn't work properly without a content script.
+// The issue is the favicon doesn't load properly, and Chromium browsers are throwing an error, stating that I need permissions.
