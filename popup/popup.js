@@ -116,6 +116,7 @@ undo_delete.addEventListener('click', () => {
     link_count.textContent = itemList.length;
     Promise.all(toRestore.map(async (link) => await attachLinks(link))).then((links) => links.forEach((link) => url_list.appendChild(link)));
   }
+  storage.set({ links: itemList });
 });
 
 trash_read.addEventListener('click', () => {
