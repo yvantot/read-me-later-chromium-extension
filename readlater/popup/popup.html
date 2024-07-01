@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="popup.css" />
+    <style>
+      body {
+        width: 300px;
+        height: 400px;
+        margin: 10px 10px;
+        position: relative;
+      }
+      h1 {
+        user-select: none;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: rgb(39, 38, 48);
+      }
+      #description {
+        user-select: none;
+        font-size: 0.7rem;
+        text-align: center;
+        border-bottom: 1px solid rgb(199, 199, 199);
+        padding-bottom: 10px;
+        line-height: 10px;
+      }
+      #add-buttons {
+        display: flex;
+        position: absolute;
+        gap: 7px;
+        top: 0;
+        right: 0;
+      }
+      #add {
+        background-color: rgb(47, 212, 47);
+        transition: all ease-in-out 0.5s;
+        padding: 3px;
+        border-radius: 5px;
+        height: fit-content;
+        box-shadow: 0px 2px 2px 0px rgb(141, 141, 141);
+      }
+      #add:hover {
+        background-color: rgb(64, 236, 130);
+        transform: scale(1.3);
+        box-shadow: 0px 0px 2px 0px rgb(141, 141, 141);
+        border-radius: 2px;
+      }
+      #add-tabs {
+        background-color: rgb(107, 175, 202);
+        transition: all ease-in-out 0.5s;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 2px 0px rgb(141, 141, 141);
+      }
+      #add-tabs:hover {
+        background-color: rgb(105, 194, 230);
+        transform: scale(1.3);
+        box-shadow: 0px 0px 2px 0px rgb(141, 141, 141);
+        border-radius: 2px;
+      }
+      #confirm-container {
+        display: flex;
+        flex-direction: column;
+      }
+      .confirm-buttons {
+        transition: all ease-in-out 0.5s;
+        padding: 3px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 2px 0px rgb(141, 141, 141);
+      }
+      #yes-confirm {
+        background-color: rgb(107, 175, 202);
+        margin-top: 5px;
+      }
+      #no-confirm {
+        background-color: rgb(221, 90, 90);
+      }
+      #trash-buttons {
+        display: flex;
+        position: absolute;
+        gap: 7px;
+        top: 0;
+        left: 0;
+      }
+      #trash {
+        background-color: rgb(230, 50, 50);
+        transition: all ease-in-out 0.5s;
+        padding: 3px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 2px 0px rgb(141, 141, 141);
+      }
+      #trash:hover {
+        background-color: rgb(153, 18, 18);
+        transform: scale(1.3);
+        box-shadow: 0px 0px 2px 0px rgb(141, 141, 141);
+        border-radius: 2px;
+      }
+      #undo {
+        background-color: rgb(158, 157, 152);
+        transition: all ease-in-out 0.5s;
+        padding: 3px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 2px 0px rgb(141, 141, 141);
+      }
+      #undo:hover {
+        background-color: rgb(122, 122, 121);
+        transform: scale(1.3);
+        box-shadow: 0px 0px 2px 0px rgb(141, 141, 141);
+        border-radius: 2px;
+      }
+      #input-box {
+        position: absolute;
+        bottom: 0;
+        margin-top: 5px;
+        box-shadow: 0px 2px 2px 0px rgb(141, 141, 141);
+        width: 100%;
+        padding: 2px 2px;
+        border-radius: 5px;
+      }
+      footer {
+        position: absolute;
+        bottom: 0;
+        height: 40px;
+        width: 100%;
+        border-top: 1px solid rgb(199, 199, 199);
+        background-color: white;
+      }
+      li {
+        margin-top: 5px;
+        padding: 2px 2px;
+        border-radius: 3px;
+        display: flex;
+        gap: 5px;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      li > a {
+        border-left: 1px solid rgb(194, 194, 194);
+        padding-left: 5px;
+        line-break: anywhere;
+        line-clamp: 2;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+      li:nth-child(even) {
+        background-color: rgb(240, 240, 240);
+      }
+      ul {
+        padding-right: 5px;
+        height: 300px;
+        overflow-y: scroll;
+      }
+      #title-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+      }
+      #title-header > span {
+        border-left: 2px solid rgb(228, 228, 228);
+        height: 20px;
+      }
+      #link-count {
+        user-select: none;
+        color: rgb(101, 180, 101);
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      .loading {
+        width: 20px;
+        -webkit-animation: rotate-center 5s ease-in-out infinite both;
+        animation: rotate-center 5s ease-in-out infinite both;
+      }
+      #loading-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div id="add-buttons">
+        <button id="add-tabs" title="✔✔ Add ALL tabs!"><img src="../assets/allbookmark.svg" alt="" /></button>
+        <button id="add" title="✔ Add this site!"><img src="../assets/bookmark.svg" alt="" /></button>
+      </div>
+      <div id="trash-buttons">
+        <button id="trash" title="❌ Clear the list."><img src="../assets/trash.svg" alt="" /></button>
+        <button id="undo" title="↩ Undo delete"><img src="../assets/undo.svg" alt="" /></button>
+      </div>
+      <div id="title-header">
+        <h1>Read Me Later</h1>
+        <span></span>
+        <p id="link-count">0</p>
+      </div>
+      <p id="description">Things you don't want in bookmark</p>
+    </header>
+    <ul id="url-list"></ul>
+    <footer>
+      <input id="input-box" type="text" placeholder="Type here: supports auto-completion!" />
+    </footer>
+  </body>
+  <script src="popup.js"></script>
+</html>
