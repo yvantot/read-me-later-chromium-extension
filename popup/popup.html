@@ -185,6 +185,21 @@
         justify-content: center;
         align-items: center;
       }
+      #donate{
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: blue;
+        text-align: center;       
+      }
+      #remove-container{
+        display: flex;
+        justify-content: space-around;
+        gap: 5px;        
+      }
+      #remove-group{
+        display: flex;
+        gap: 5px;
+      }
     </style>
   </head>
   <body>
@@ -201,13 +216,20 @@
         <h1>Read Me Later</h1>
         <span></span>
         <p id="link-count">0</p>
-      </div>
-      <p id="description">Things you don't want in bookmark</p>
+      </div>          
+      <p id="description">Things you don't want in bookmark</p>      
     </header>
-    <ul id="url-list"></ul>
-    <footer>
-      <input id="input-box" type="text" placeholder="Type here: supports auto-completion!" />
-    </footer>
+    <ul id="url-list"></ul>    
+    <footer>      
+      <input id="input-box" type="text" placeholder="Type here: supports auto-completion!" />      
+      <div id="remove-container">        
+        <a id="donate" href="https://ko-fi.com/yvantot" target="_blank">Made with ☕</a>
+        <div id="remove-group">
+          <input id="remove-tab" type="checkbox">
+          <p>Close tabs</p>
+        </div>
+      </div>
+    </footer>    
   </body>
   <script src="popup.js"></script>
 </html>

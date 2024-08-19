@@ -6,6 +6,7 @@ const trash_read = document.getElementById('trash');
 const input_url = document.getElementById('input-box');
 const link_count = document.getElementById('link-count');
 const undo_delete = document.getElementById('undo');
+const remove_tab = document.getElementById('remove-tab');
 
 const CHROME_FAVICON_API = 'https://www.google.com/s2/favicons?domain=';
 const GOOGLE_SEARCH = 'https://www.google.com/search?q=';
@@ -77,9 +78,10 @@ input_url.addEventListener('keydown', (e) => {
 
 add_read.addEventListener('click', () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if(remove_tab.checked)chrome.tabs.remove(tabs[0].id);
     itemList.push({
       tab_url: tabs[0].url,
-      title_url: tabs[0].title,
+      title_url: tabs[0].title,      
     });
     storage.set({ links: itemList }, async () => {
       const url_data = document.createElement('li');
@@ -174,6 +176,7 @@ add_all.addEventListener('click', () => {
           title_url: tab.title,
         });
         createLink(tab);
+        if(remove_tab.checked)chrome.tabs.remove(tab.id);
       });
       storage.set({ links: itemList });
       link_count.textContent = itemList.length;
