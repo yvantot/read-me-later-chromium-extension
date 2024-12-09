@@ -2,12 +2,12 @@
 
 _Organize your tabs & save them to read list_
 
-**#Features**
+**Features**
 - Save current / every opened tabs
 - Auto-completion for your curiosities
 - Deleted saved links recovery with undo feature
 - Lightweight & data-persistent
 
-**#Technology used**
+**Technology used**
 - HTML, CSS & JS
 - Chrome API
